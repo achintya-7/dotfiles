@@ -86,4 +86,34 @@ services:
       - "6881:6881"
       - "6881:6881/udp"
     restart: unless-stopped
+  
+  lamba:
+    image: dperson/samba:latest
+    container_name: samba
+    environment:
+      - TZ=Asia/Kolkata
+      - USERID=13000
+      - GROUPID=13000
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139"
+      - "445:445"
+    volumes:
+      - /media/achintya/servarr/downloads:/shared:rw
+    command: >
+      -u "achintya;X7hunter" 
+      -s "downloads;/shared;yes;yes;yes"
+    restart: unless-stopped
 
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - ./homarr/configs:/app/data/configs
+      - ./homarr/icons:/app/public/icons
+      - ./homarr/data:/data
+    ports:
+      - '7575:7575'
