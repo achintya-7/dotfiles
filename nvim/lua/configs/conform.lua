@@ -7,7 +7,6 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     json = { "prettier" },
-    go = { "golines" },
     yaml = { "prettier" },
     markdown = { "prettier" },
     graphql = { "prettier" },
