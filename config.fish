@@ -1,19 +1,10 @@
-zoxide init fish | source
-starship init fish | source
-
 fish_vi_key_bindings
 
 set fish_vi_force_cursor line
 
-# Emulates vim's cursor shape behavior
-# Set the normal and visual mode cursors to a block
 set fish_cursor_default block 
-# Set the insert mode cursor to a line
 set fish_cursor_insert line blink 
-# Set the replace mode cursor to an underscore
 set fish_cursor_replace_one underscore
-# The following variable can be used to configure cursor shape in
-# visual mode, but due to fish_cursor_default, is redundant here
 set fish_cursor_visual block
 
 set -x EDITOR "nvim"
@@ -24,7 +15,8 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # Remove fish greeting
 set fish_greeting ""
 
-fish_add_path -g /Users/achin/.nvm/versions/node/v19.8.1/bin/
+fish_add_path -m ~/.local/bin
+
 
 # Functions needed for !! and !$
 function __history_previous_command
@@ -45,6 +37,7 @@ function __history_previous_command_arguments
     commandline -i '$'
   end
 end
+
 # The bindings for !! and !$
 if [ $fish_key_bindings = fish_vi_key_bindings ];
   bind -Minsert ! __history_previous_command
@@ -57,16 +50,6 @@ end
 # Start su with fish instead of bash
 function su
    command su --shell=/usr/bin/fish $argv
-end
-
-# Usage: envsource <path/to/env>
-
-function envsource
-  for line in (cat $argv | grep -v '^#')
-    set item (string split -m 1 '=' $line)
-    set -gx $item[1] $item[2]
-    echo "Exported key $item[1]"
-  end
 end
 
 function fuckapple
@@ -87,19 +70,17 @@ end
 
 # Some cusotm commands for the lols
 
-# Changing ls to exa
-alias ls="exa -la --color=always --group-directories-first --icons --no-permissions --no-time --no-user"
-alias lt="exa -aT --color=always --group-directories-first --icons"
-alias la="exa -l --color=always --group-directories-first --icons"
-alias ll="exa -a --color=always --group-directories-first --icons"
+# Changing ls to eza
+alias ls="eza -la --color=always --group-directories-first --icons --no-permissions --no-time --no-user"
+alias lt="eza -aT --color=always --group-directories-first --icons"
+alias la="eza -l --color=always --group-directories-first --icons"
+alias ll="eza -a --color=always --group-directories-first --icons"
 
 # Confirm before overwriting
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 
-# atuin
-atuin init fish | source
 
 # cd shortcuts
 alias cd="z"
@@ -138,5 +119,17 @@ if not string match -q -- $PNPM_HOME $PATH
 end
 # pnpm end
 
+# go stuff
+set -x -U GOPATH $HOME/go
+fish_add_path -g ~/go/bin
+
+# npm stuff
+fish_add_path -g /Users/achintya/.nvm/versions/node/v18.16.1/bin
+
+# softwares 
+atuin init fish | source
+zoxide init fish | source
+starship init fish | source
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/achin/Downloads/Softwares/google-cloud-sdk/path.fish.inc' ]; . '/Users/achin/Downloads/Softwares/google-cloud-sdk/path.fish.inc'; end
+if [ -f '/Users/achintya/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/achintya/Downloads/google-cloud-sdk/path.fish.inc'; end
