@@ -101,16 +101,14 @@ alias vim="nvim"
 alias neofetch="neofetch --source $HOME/.config/neofetch/logo.txt"
 alias tl="tldr -s"
 
-alias pdb="sudo cloud-sql-proxy aftershoot-co:us-central1:editing-uploader -p 2345"
-alias ddb="sudo cloud-sql-proxy aftershoot-stage:us-central1:aftershoot-stage-db -p 1234"
-alias rpdb="sudo cloud-sql-proxy aftershoot-co:us-central1:profile-manager-test -p 2205"
+alias pdb="cloud-sql-proxy aftershoot-co:us-central1:editing-uploader -p 2345"
+alias ddb="cloud-sql-proxy aftershoot-stage:us-central1:aftershoot-stage-db -p 1234"
+alias rpdb="cloud-sql-proxy aftershoot-co:us-central1:profile-manager-test -p 2205"
 
 alias plog="gcloud beta run services logs tail --project=aftershoot-co --region=us-central1"
 alias slog="gcloud beta run services logs tail --project=aftershoot-stage --region=us-central1"
 
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # pnpm
 set -gx PNPM_HOME "/Users/achin/Library/pnpm"
